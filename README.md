@@ -12,6 +12,7 @@ The goal of this challenge is to annotate each variant in the [supplied VCF](htt
 
 Challenge details posted [here](https://github.com/ShanSabri/tempus/blob/master/data/Tempus_Bioinformatics_Challenge.pdf). 
 
+Variants are queried by locations and alleles (for Homo sapiens) from [NCBI dbSNP Build 144](http://bioconductor.org/packages/release/data/annotation/html/SNPlocs.Hsapiens.dbSNP144.GRCh37.html). SNP IDs are then used to query [ExAC release 1.0 subset of nonTCGA exomes](http://bioconductor.org/packages/release/data/annotation/html/MafDb.ExAC.r1.0.nonTCGA.hs37d5.html) for minor allele frequency data. 
 
 ## Installation & Usage
 
@@ -22,7 +23,7 @@ R CMD BATCH annotate.R
 ```
 
 ## Output
-Included in the [`output`](https://github.com/ShanSabri/tempus/tree/master/output) directory is the annotated data.frame object (rds) and tab-seperated text annotation file (txt): 
+Included in the [`output`](https://github.com/ShanSabri/tempus/tree/master/output) directory is the annotated data.frame object (rds) and tab-seperated text annotation file (txt). 
 
 ```
 tempus/output
@@ -31,6 +32,20 @@ tempus/output
 
  540K used in 0 directories, 2 files
 ```
+
+The columns of these data correspond to: 
+
+1. Chromosome
+2. Position 
+3. Reference
+4. Alternative 
+5. Type of variation 
+6. Depth of coverage
+7. Number of reads supporting variant 
+8. Percentage of reads supporting the variant
+9. Allele frequency of variant from ExAC; NA if not found in SNPdb or annotated in `MafDb.ExAC.r1.0.nonTCGA.hs37d5_3.10.0`
+10. SNP ID; NA if not found in SNPdb
+11. Alleles for each SNP represented by an IUPAC nucleotide ambiguity code; NA if not found in SNP db
 
 <details><summary>Session info</summary>
 <p>
